@@ -24,3 +24,11 @@ services:
     Drjele\Symfony\Console\Template\SupervisorTemplate:
         tags:
             - {name: 'drjele.symfony.console.template'}
+
+    Drjele\Symfony\Console\Template\KubernetesCronjobTemplate:
+        tags:
+            - {name: 'drjele.symfony.console.template'}
+
+    Drjele\Symfony\Console\Template\KubernetesWorkerTemplate:
+        tags:
+            - {name: 'drjele.symfony.console.template'}
