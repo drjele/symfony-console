@@ -1,0 +1,68 @@
+{
+    "name": "drjele/symfony-console",
+    "type": "symfony-bundle",
+    "description": "Symfony console utilities",
+    "keywords": [
+        "symfony",
+        "console",
+        "cronjob",
+        "worker"
+    ],
+    "homepage": "https://gitlab.com/drjele-symfony/console",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Jeledintan",
+            "email": "adrian.jeledintan@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "symfony/config": "^4.0|^5.0|^6.0",
+        "symfony/console": "^4.0|^5.0|^6.0",
+        "symfony/dependency-injection": "^4.0|^5.0|^6.0",
+        "symfony/filesystem": "^4.0|^5.0|^6.0",
+        "symfony/http-kernel": "^4.0|^5.0|^6.0"
+    },
+    "require-dev": {
+        "drjele/symfony-phpunit": "^3.0",
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Drjele\\Symfony\\Console\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Drjele\\Symfony\\Console\\Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "install-hooks": [
+            "[ $COMPOSER_DEV_MODE -eq 1 ] && rm -rf .git/hooks && ln -s ../scripts/git_hooks .git/hooks || exit 0"
+        ],
+        "post-install-cmd": [
+            "@install-hooks"
+        ],
+        "post-update-cmd": [
+            "@install-hooks"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "exclude": [
+            "/scripts",
+            "/tests",
+            "/.php-cs-fixer.dist.php",
+            "/.php_cs.dist",
+            "/phpcs.xml.dist",
+            "/phpunit.xml.dist"
+        ]
+    }
+}

@@ -1,0 +1,122 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * Copyright (c) Adrian Jeledintan
+ */
+
+namespace Drjele\Symfony\Console\Template;
+
+use Drjele\Symfony\Console\Contract\ConfigInterface;
+use Drjele\Symfony\Console\Contract\TemplateInterface;
+use Drjele\Symfony\Console\Dto\ConfFilesDto;
+use Drjele\Symfony\Console\Dto\Worker\CommandDto;
+use Drjele\Symfony\Console\Dto\Worker\ConfigDto;
+use Drjele\Symfony\Console\Exception\Exception;
+use Drjele\Symfony\Console\Template\Traits\WorkerNumberOfProcessesTrait;
+
+class SupervisorTemplate implements TemplateInterface
+{
+    use WorkerNumberOfProcessesTrait;
+
+    /** @param ConfigDto $configDto */
+    public function generate(ConfigInterface $configDto, array $commands): ConfFilesDto
+    {
+        $confFilesDto = new ConfFilesDto();
+
+        /** @var CommandDto $commandDto */
+        foreach ($commands as $commandDto) {
+            $configurationParams = [
+                '%logsDir%' => $configDto->getLogsDir(),
+                '%programGroupName%' => \implode('-', [$this->getPrefix($configDto, $commandDto), $commandDto->getName()]),
+                '%programName%' => $commandDto->getName(),
+                '%command%' => \implode(' ', $commandDto->getCommand()),
+                '%user%' => $this->getUser($configDto, $commandDto),
+                '%numberOfProcesses%' => $this->getNumberOfProcesses($configDto, $commandDto),
+                '%autoStart%' => $this->getAutoStart($configDto, $commandDto) ? 'true' : 'false',
+                '%autoRestart%' => $this->getAutoRestart($configDto, $commandDto) ? 'true' : 'false',
+            ];
+
+            $content = \str_replace(
+                \array_keys($configurationParams),
+                \array_values($configurationParams),
+                $this->getTemplate()
+            );
+
+            $confPath = $this->getPath($configDto, $commandDto);
+
+            $confFilesDto->addFile($confPath, $content);
+        }
+
+        return $confFilesDto;
+    }
+
+    protected function getPath(ConfigDto $configDto, CommandDto $commandDto): string
+    {
+        return \sprintf('%s/%s.conf', $configDto->getConfFilesDir(), $commandDto->getName());
+    }
+
+    protected function getAutoStart(ConfigDto $configDto, CommandDto $commandDto): bool
+    {
+        $autoStart = $commandDto->getSettings()->getAutoStart() ?? $configDto->getSettings()->getAutoStart();
+
+        if (!$autoStart) {
+            throw new Exception('the `auto start` is mandatory');
+        }
+
+        return $autoStart;
+    }
+
+    protected function getAutoRestart(ConfigDto $configDto, CommandDto $commandDto): bool
+    {
+        $autoRestart = $commandDto->getSettings()->getAutoRestart() ?? $configDto->getSettings()->getAutoRestart();
+
+        if (!$autoRestart) {
+            throw new Exception('the `auto restart` is mandatory');
+        }
+
+        return $autoRestart;
+    }
+
+    protected function getPrefix(ConfigDto $configDto, CommandDto $commandDto): string
+    {
+        $prefix = $commandDto->getSettings()->getPrefix() ?? $configDto->getSettings()->getPrefix();
+
+        if (!$prefix) {
+            throw new Exception('the `prefix` is mandatory');
+        }
+
+        return $prefix;
+    }
+
+    protected function getUser(ConfigDto $configDto, CommandDto $commandDto): string
+    {
+        $user = $commandDto->getSettings()->getUser() ?? $configDto->getSettings()->getUser();
+
+        if (!$user) {
+            throw new Exception('the `user` is mandatory');
+        }
+
+        return $user;
+    }
+
+    protected function getTemplate(): string
+    {
+        return '[program:%programGroupName%]
+command = %command%
+process_name = %(program_name)s_%(process_num)s
+numprocs = %numberOfProcesses%
+autostart = %autoStart%
+autorestart = %autoRestart%
+stdout_logfile = %logsDir%/%programName%.log
+stderr_logfile = %logsDir%/%programName%.log
+user = %user%
+stopwaitsecs = 30
+stdout_logfile_maxbytes = 0
+stderr_logfile_maxbytes = 0
+stdout_logfile_backups = 0
+stderr_logfile_backups = 0
+startsecs = 0';
+    }
+}
