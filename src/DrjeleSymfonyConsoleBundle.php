@@ -10,6 +10,6 @@ namespace Drjele\Symfony\Console;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class DrjeleSymfonyCommandBundle extends Bundle
+class DrjeleSymfonyConsoleBundle extends Bundle
 {
 }
