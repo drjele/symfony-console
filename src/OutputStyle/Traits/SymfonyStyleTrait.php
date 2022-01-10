@@ -6,39 +6,39 @@ declare(strict_types=1);
  * Copyright (c) Adrian Jeledintan
  */
 
-namespace Drjele\Symfony\Console\Command\Traits;
+namespace Drjele\Symfony\Console\OutputStyle\Traits;
 
 use DateTime;
 use Drjele\Symfony\Console\Service\MemoryService;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
-trait OutputTrait
+trait SymfonyStyleTrait
 {
-    protected SymfonyStyle $io;
+    protected SymfonyStyle $style;
 
-    protected function writeln(string $text): void
+    public function writeln(string $text): void
     {
-        $this->io->writeln($this->format($text));
+        $this->style->writeln($this->format($text));
     }
 
-    protected function error(string $text, Throwable $t = null): void
+    public function error(string $text, Throwable $t = null): void
     {
         if (null !== $t) {
             $text = \sprintf('%s / %s::%s / %s', $text, $t->getFile(), $t->getLine(), $t->getTraceAsString());
         }
 
-        $this->io->error($this->format($text));
+        $this->style->error($this->format($text));
     }
 
-    protected function warning(string $text): void
+    public function warning(string $text): void
     {
-        $this->io->warning($this->format($text));
+        $this->style->warning($this->format($text));
     }
 
-    protected function success(string $text): void
+    public function success(string $text): void
     {
-        $this->io->success($this->format($text));
+        $this->style->success($this->format($text));
     }
 
     private function format(string $text): string

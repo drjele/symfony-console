@@ -14,8 +14,10 @@ use Drjele\Symfony\Console\Exception\Exception;
 
 trait WorkerNumberOfProcessesTrait
 {
-    protected function getNumberOfProcesses(ConfigDto $configDto, CommandDto $commandDto): int
-    {
+    protected function getNumberOfProcesses(
+        ConfigDto $configDto,
+        CommandDto $commandDto
+    ): int {
         $numberOfProcesses = $commandDto->getSettings()->getNumberOfProcesses() ?? $configDto->getSettings()->getNumberOfProcesses();
 
         if (!$numberOfProcesses) {

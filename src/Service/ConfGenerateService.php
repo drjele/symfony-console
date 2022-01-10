@@ -27,8 +27,10 @@ class ConfGenerateService
         }
     }
 
-    public function generate(ConfigInterface $config, array $commands): array
-    {
+    public function generate(
+        ConfigInterface $config,
+        array $commands
+    ): array {
         $this->initConfFilesDir($config);
 
         $this->initLogsDir($config);

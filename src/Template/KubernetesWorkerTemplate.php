@@ -22,8 +22,10 @@ class KubernetesWorkerTemplate implements TemplateInterface
     use WorkerNumberOfProcessesTrait;
 
     /** @param ConfigDto $configDto */
-    public function generate(ConfigInterface $configDto, array $commands): ConfFilesDto
-    {
+    public function generate(
+        ConfigInterface $configDto,
+        array $commands
+    ): ConfFilesDto {
         $workers = [];
         $index = 0;
 
@@ -53,8 +55,10 @@ class KubernetesWorkerTemplate implements TemplateInterface
         return $confFilesDto;
     }
 
-    protected function buildCommand(CommandDto $commandDto, ConfigDto $configDto): array
-    {
+    protected function buildCommand(
+        CommandDto $commandDto,
+        ConfigDto $configDto
+    ): array {
         $name = $this->sanitize($commandDto->getName());
 
         return [

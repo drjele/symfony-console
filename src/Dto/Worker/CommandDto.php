@@ -16,8 +16,10 @@ class CommandDto
     private array $command;
     private CommandSettingsDto $settings;
 
-    public function __construct(string $name, array $parameters)
-    {
+    public function __construct(
+        string $name,
+        array $parameters
+    ) {
         $this->name = $name;
         $this->command = $parameters[Configuration::COMMAND];
         $this->settings = new CommandSettingsDto($parameters[Configuration::SETTINGS] ?? []);

@@ -17,8 +17,10 @@ class CommandDto
     private ScheduleDto $schedule;
     private CommandSettingsDto $settings;
 
-    public function __construct(string $name, array $parameters)
-    {
+    public function __construct(
+        string $name,
+        array $parameters
+    ) {
         $this->name = $name;
         $this->command = $parameters[Configuration::COMMAND];
         $this->schedule = new ScheduleDto($parameters[Configuration::SCHEDULE]);

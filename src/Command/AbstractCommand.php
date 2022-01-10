@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Drjele\Symfony\Console\Command;
 
 use DateTime;
-use Drjele\Symfony\Console\Command\Traits\OutputTrait;
+use Drjele\Symfony\Console\OutputStyle\Traits\SymfonyStyleTrait;
 use Drjele\Symfony\Console\Service\MemoryService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 abstract class AbstractCommand extends Command
 {
-    use OutputTrait;
+    use SymfonyStyleTrait;
 
     /** there are here for older symfony projects */
     public const SUCCESS = 0;
@@ -45,7 +45,7 @@ abstract class AbstractCommand extends Command
         $this->memoryLimit = null;
         $this->timeLimit = null;
 
-        $this->io = new SymfonyStyle($input, $output);
+        $this->style = new SymfonyStyle($input, $output);
 
         if ($this->input->hasOption(self::MEMORY_LIMIT)
             && $memoryLimit = $this->input->getOption(self::MEMORY_LIMIT)) {
@@ -59,7 +59,7 @@ abstract class AbstractCommand extends Command
             $this->timeLimit = (int)$timeLimit;
         }
 
-        $this->io->title(\sprintf('<bg=blue>[%s]</> %s', (new DateTime())->format('Y-m-d'), $this->getName()));
+        $this->style->title(\sprintf('<bg=blue>[%s]</> %s', (new DateTime())->format('Y-m-d'), $this->getName()));
     }
 
     protected function configure(): void

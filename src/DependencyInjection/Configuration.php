@@ -150,14 +150,12 @@ class Configuration implements ConfigurationInterface
         return $workerTree;
     }
 
-    private function appendSupervisorConfig(NodeBuilder $node): self
+    private function appendSupervisorConfig(NodeBuilder $node): void
     {
         $node->integerNode(static::NUMBER_OF_PROCESSES)->defaultValue(1)->end()
             ->booleanNode(static::AUTO_START)->defaultTrue()->end()
             ->booleanNode(static::AUTO_RESTART)->defaultTrue()->end()
             ->scalarNode(static::PREFIX)->defaultNull()->end()
             ->scalarNode(static::USER)->defaultNull()->end();
-
-        return $this;
     }
 }

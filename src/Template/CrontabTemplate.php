@@ -18,8 +18,10 @@ use Drjele\Symfony\Console\Dto\Cronjob\ScheduleDto;
 class CrontabTemplate implements TemplateInterface
 {
     /** @param ConfigDto $configDto */
-    public function generate(ConfigInterface $configDto, array $commands): ConfFilesDto
-    {
+    public function generate(
+        ConfigInterface $configDto,
+        array $commands
+    ): ConfFilesDto {
         $cronjobs = [];
 
         foreach ($commands as $commandDto) {
@@ -48,8 +50,10 @@ class CrontabTemplate implements TemplateInterface
         return $confFilesDto;
     }
 
-    protected function buildCommand(CommandDto $commandDto, ConfigDto $configDto): string
-    {
+    protected function buildCommand(
+        CommandDto $commandDto,
+        ConfigDto $configDto
+    ): string {
         $schedule = $this->buildSchedule($commandDto->getSchedule());
 
         $commandParts = $commandDto->getCommand();

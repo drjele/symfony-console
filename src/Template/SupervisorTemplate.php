@@ -21,8 +21,10 @@ class SupervisorTemplate implements TemplateInterface
     use WorkerNumberOfProcessesTrait;
 
     /** @param ConfigDto $configDto */
-    public function generate(ConfigInterface $configDto, array $commands): ConfFilesDto
-    {
+    public function generate(
+        ConfigInterface $configDto,
+        array $commands
+    ): ConfFilesDto {
         $confFilesDto = new ConfFilesDto();
 
         /** @var CommandDto $commandDto */
@@ -52,13 +54,17 @@ class SupervisorTemplate implements TemplateInterface
         return $confFilesDto;
     }
 
-    protected function getPath(ConfigDto $configDto, CommandDto $commandDto): string
-    {
+    protected function getPath(
+        ConfigDto $configDto,
+        CommandDto $commandDto
+    ): string {
         return \sprintf('%s/%s.conf', $configDto->getConfFilesDir(), $commandDto->getName());
     }
 
-    protected function getAutoStart(ConfigDto $configDto, CommandDto $commandDto): bool
-    {
+    protected function getAutoStart(
+        ConfigDto $configDto,
+        CommandDto $commandDto
+    ): bool {
         $autoStart = $commandDto->getSettings()->getAutoStart() ?? $configDto->getSettings()->getAutoStart();
 
         if (!$autoStart) {
@@ -68,8 +74,10 @@ class SupervisorTemplate implements TemplateInterface
         return $autoStart;
     }
 
-    protected function getAutoRestart(ConfigDto $configDto, CommandDto $commandDto): bool
-    {
+    protected function getAutoRestart(
+        ConfigDto $configDto,
+        CommandDto $commandDto
+    ): bool {
         $autoRestart = $commandDto->getSettings()->getAutoRestart() ?? $configDto->getSettings()->getAutoRestart();
 
         if (!$autoRestart) {
@@ -79,8 +87,10 @@ class SupervisorTemplate implements TemplateInterface
         return $autoRestart;
     }
 
-    protected function getPrefix(ConfigDto $configDto, CommandDto $commandDto): string
-    {
+    protected function getPrefix(
+        ConfigDto $configDto,
+        CommandDto $commandDto
+    ): string {
         $prefix = $commandDto->getSettings()->getPrefix() ?? $configDto->getSettings()->getPrefix();
 
         if (!$prefix) {
@@ -90,8 +100,10 @@ class SupervisorTemplate implements TemplateInterface
         return $prefix;
     }
 
-    protected function getUser(ConfigDto $configDto, CommandDto $commandDto): string
-    {
+    protected function getUser(
+        ConfigDto $configDto,
+        CommandDto $commandDto
+    ): string {
         $user = $commandDto->getSettings()->getUser() ?? $configDto->getSettings()->getUser();
 
         if (!$user) {

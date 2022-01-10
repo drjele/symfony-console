@@ -21,8 +21,10 @@ class KubernetesCronjobTemplate implements TemplateInterface
     use KubernetesJobTrait;
 
     /** @param ConfigDto $configDto */
-    public function generate(ConfigInterface $configDto, array $commands): ConfFilesDto
-    {
+    public function generate(
+        ConfigInterface $configDto,
+        array $commands
+    ): ConfFilesDto {
         $cronjobs = [];
         $index = 0;
 

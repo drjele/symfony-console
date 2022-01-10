@@ -56,8 +56,8 @@ class CronjobCreateCommand extends AbstractCommand
                     $this->writeln($confFile);
                 }
             }
-        } catch (Throwable $e) {
-            $this->error($e->getMessage());
+        } catch (Throwable $t) {
+            $this->error($t->getMessage());
 
             return static::FAILURE;
         }
