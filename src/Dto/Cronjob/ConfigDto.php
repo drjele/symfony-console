@@ -9,10 +9,11 @@ declare(strict_types=1);
 namespace Drjele\Symfony\Console\Dto\Cronjob;
 
 use Drjele\Symfony\Console\Contract\ConfigInterface;
+use Drjele\Symfony\Console\Contract\SettingsInterface;
 use Drjele\Symfony\Console\DependencyInjection\Configuration;
 use Drjele\Symfony\Console\Dto\Traits\ConfigTrait;
 
-class ConfigDto implements ConfigInterface
+class ConfigDto implements ConfigInterface, SettingsInterface
 {
     use ConfigTrait;
 

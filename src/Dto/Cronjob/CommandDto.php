@@ -8,9 +8,10 @@ declare(strict_types=1);
 
 namespace Drjele\Symfony\Console\Dto\Cronjob;
 
+use Drjele\Symfony\Console\Contract\SettingsInterface;
 use Drjele\Symfony\Console\DependencyInjection\Configuration;
 
-class CommandDto
+class CommandDto implements SettingsInterface
 {
     private string $name;
     private array $command;

@@ -29,26 +29,11 @@ class SupervisorTemplate implements TemplateInterface
 
         /** @var CommandDto $commandDto */
         foreach ($commands as $commandDto) {
-            $configurationParams = [
-                '%logsDir%' => $configDto->getLogsDir(),
-                '%programGroupName%' => \implode('-', [$this->getPrefix($configDto, $commandDto), $commandDto->getName()]),
-                '%programName%' => $commandDto->getName(),
-                '%command%' => \implode(' ', $commandDto->getCommand()),
-                '%user%' => $this->getUser($configDto, $commandDto),
-                '%numberOfProcesses%' => $this->getNumberOfProcesses($configDto, $commandDto),
-                '%autoStart%' => $this->getAutoStart($configDto, $commandDto) ? 'true' : 'false',
-                '%autoRestart%' => $this->getAutoRestart($configDto, $commandDto) ? 'true' : 'false',
-            ];
-
-            $content = \str_replace(
-                \array_keys($configurationParams),
-                \array_values($configurationParams),
-                $this->getTemplate()
-            );
+            $worker = $this->buildCommand($commandDto, $configDto);
 
             $confPath = $this->getPath($configDto, $commandDto);
 
-            $confFilesDto->addFile($confPath, $content);
+            $confFilesDto->addFile($confPath, $worker);
         }
 
         return $confFilesDto;
@@ -59,6 +44,28 @@ class SupervisorTemplate implements TemplateInterface
         CommandDto $commandDto
     ): string {
         return \sprintf('%s/%s.conf', $configDto->getConfFilesDir(), $commandDto->getName());
+    }
+
+    protected function buildCommand(
+        CommandDto $commandDto,
+        ConfigDto $configDto
+    ): string {
+        $configurationParams = [
+            '%logsDir%' => $configDto->getLogsDir(),
+            '%programGroupName%' => \implode('-', [$this->getPrefix($configDto, $commandDto), $commandDto->getName()]),
+            '%programName%' => $commandDto->getName(),
+            '%command%' => \implode(' ', $commandDto->getCommand()),
+            '%user%' => $this->getUser($configDto, $commandDto),
+            '%numberOfProcesses%' => $this->getNumberOfProcesses($configDto, $commandDto),
+            '%autoStart%' => $this->getAutoStart($configDto, $commandDto) ? 'true' : 'false',
+            '%autoRestart%' => $this->getAutoRestart($configDto, $commandDto) ? 'true' : 'false',
+        ];
+
+        return \str_replace(
+            \array_keys($configurationParams),
+            \array_values($configurationParams),
+            $this->getTemplate()
+        );
     }
 
     protected function getAutoStart(

@@ -29,7 +29,7 @@ class KubernetesCronjobTemplate implements TemplateInterface
         $index = 0;
 
         foreach ($commands as $commandDto) {
-            $cronjobs['"' . ($index++) . '"'] = $this->buildCommand($commandDto);
+            $cronjobs['"' . ($index++) . '"'] = $this->buildCommand($commandDto, $configDto);
         }
 
         $content = $this->convertArrayToString(
@@ -54,8 +54,10 @@ class KubernetesCronjobTemplate implements TemplateInterface
         return $confFilesDto;
     }
 
-    protected function buildCommand(CommandDto $commandDto): array
-    {
+    protected function buildCommand(
+        CommandDto $commandDto,
+        ConfigDto $configDto
+    ): array {
         $name = $this->sanitize($commandDto->getName());
 
         return [
