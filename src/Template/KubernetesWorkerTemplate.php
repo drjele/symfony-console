@@ -48,7 +48,7 @@ class KubernetesWorkerTemplate implements TemplateInterface
 
         $confFilesDto = new ConfFilesDto();
 
-        if ($workers) {
+        if (\count($workers) > 0) {
             $confFilesDto->addFile($crontabPath, $content);
         }
 

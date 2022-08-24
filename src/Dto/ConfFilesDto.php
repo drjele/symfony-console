@@ -26,7 +26,7 @@ class ConfFilesDto
 
     public function addFile(string $path, string $content): self
     {
-        if (isset($this->files[$path])) {
+        if (true === isset($this->files[$path])) {
             throw new Exception(
                 \sprintf('the file path is in use `%s`', $path)
             );

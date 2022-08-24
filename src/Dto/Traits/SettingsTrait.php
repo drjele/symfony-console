@@ -17,7 +17,7 @@ trait SettingsTrait
 
     public function getSetting(string $setting): ?string
     {
-        if (!\property_exists($this->settings, $setting)) {
+        if (false === \property_exists($this->settings, $setting)) {
             throw new SettingNotFound($setting, static::class);
         }
 
@@ -33,7 +33,7 @@ trait SettingsTrait
         foreach ($data as $key => $value) {
             $propertyName = $this->toCamelCase($key);
 
-            if (\property_exists($this, $propertyName)) {
+            if (true === \property_exists($this, $propertyName)) {
                 $this->{$propertyName} = $value;
                 continue;
             }

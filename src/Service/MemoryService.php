@@ -19,16 +19,16 @@ class MemoryService
 
     public static function getMemoryUsage(): string
     {
-        $bits = \memory_get_usage(true);
+        $bytes = \memory_get_usage(true);
 
-        return static::convertBitsToHumanReadable($bits);
+        return static::convertBytesToHumanReadable($bytes);
     }
 
-    public static function convertBitsToHumanReadable(int $bits): string
+    public static function convertBytesToHumanReadable(int $bytes): string
     {
         $unit = ['B ', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
-        return @\round($bits / 1024 ** ($i = \floor(\log($bits, 1024))), 2) . ' ' . $unit[(int)$i];
+        return @\round($bytes / 1024 ** ($i = \floor(\log($bytes, 1024))), 2) . ' ' . $unit[(int)$i];
     }
 
     public static function returnBytes(string $value): int

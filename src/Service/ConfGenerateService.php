@@ -60,7 +60,7 @@ class ConfGenerateService
     {
         $templateClass = $config->getTemplateClass();
 
-        if (!isset($this->templates[$templateClass])) {
+        if (false === isset($this->templates[$templateClass])) {
             throw new Exception(\sprintf('the template `%s` does not exist', $templateClass));
         }
 

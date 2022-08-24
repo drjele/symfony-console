@@ -22,10 +22,14 @@ trait SymfonyStyleTrait
         $this->style->writeln($this->format($text));
     }
 
-    public function error(string $text, Throwable $t = null): void
+    public function error(string $text, Throwable $t = null, bool $exposeTrace = false): void
     {
         if (null !== $t) {
-            $text = \sprintf('%s / %s::%s / %s', $text, $t->getFile(), $t->getLine(), $t->getTraceAsString());
+            $text = \sprintf('%s / %s::%s::%s', $text, $t::class, $t->getFile(), $t->getLine());
+
+            if (true === $exposeTrace) {
+                $text = \sprintf('%s / %s', $text, $t->getTraceAsString());
+            }
         }
 
         $this->style->error($this->format($text));

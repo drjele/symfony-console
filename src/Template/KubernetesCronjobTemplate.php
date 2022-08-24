@@ -47,7 +47,7 @@ class KubernetesCronjobTemplate implements TemplateInterface
 
         $confFilesDto = new ConfFilesDto();
 
-        if ($cronjobs) {
+        if (\count($cronjobs) > 0) {
             $confFilesDto->addFile($crontabPath, $content);
         }
 

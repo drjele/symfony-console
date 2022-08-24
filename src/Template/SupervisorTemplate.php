@@ -57,8 +57,8 @@ class SupervisorTemplate implements TemplateInterface
             '%command%' => \implode(' ', $commandDto->getCommand()),
             '%user%' => $this->getUser($configDto, $commandDto),
             '%numberOfProcesses%' => $this->getNumberOfProcesses($configDto, $commandDto),
-            '%autoStart%' => $this->getAutoStart($configDto, $commandDto) ? 'true' : 'false',
-            '%autoRestart%' => $this->getAutoRestart($configDto, $commandDto) ? 'true' : 'false',
+            '%autoStart%' => true === $this->getAutoStart($configDto, $commandDto) ? 'true' : 'false',
+            '%autoRestart%' => true === $this->getAutoRestart($configDto, $commandDto) ? 'true' : 'false',
         ];
 
         return \str_replace(
@@ -74,7 +74,7 @@ class SupervisorTemplate implements TemplateInterface
     ): bool {
         $autoStart = $commandDto->getSettings()->getAutoStart() ?? $configDto->getSettings()->getAutoStart();
 
-        if (!$autoStart) {
+        if (null === $autoStart) {
             throw new Exception('the `auto start` is mandatory');
         }
 
@@ -87,7 +87,7 @@ class SupervisorTemplate implements TemplateInterface
     ): bool {
         $autoRestart = $commandDto->getSettings()->getAutoRestart() ?? $configDto->getSettings()->getAutoRestart();
 
-        if (!$autoRestart) {
+        if (null === $autoRestart) {
             throw new Exception('the `auto restart` is mandatory');
         }
 
@@ -100,7 +100,7 @@ class SupervisorTemplate implements TemplateInterface
     ): string {
         $prefix = $commandDto->getSettings()->getPrefix() ?? $configDto->getSettings()->getPrefix();
 
-        if (!$prefix) {
+        if (true === empty($prefix)) {
             throw new Exception('the `prefix` is mandatory');
         }
 
@@ -113,7 +113,7 @@ class SupervisorTemplate implements TemplateInterface
     ): string {
         $user = $commandDto->getSettings()->getUser() ?? $configDto->getSettings()->getUser();
 
-        if (!$user) {
+        if (true === empty($user)) {
             throw new Exception('the `user` is mandatory');
         }
 

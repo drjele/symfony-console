@@ -47,14 +47,14 @@ abstract class AbstractCommand extends Command
 
         $this->style = new SymfonyStyle($input, $output);
 
-        if ($this->input->hasOption(self::MEMORY_LIMIT)
+        if (true === $this->input->hasOption(self::MEMORY_LIMIT)
             && $memoryLimit = $this->input->getOption(self::MEMORY_LIMIT)) {
             $this->memoryLimit = (string)$memoryLimit;
 
             MemoryService::setMemoryLimitIfNotHigher($this->memoryLimit);
         }
 
-        if ($this->input->hasOption(self::TIME_LIMIT)
+        if (true === $this->input->hasOption(self::TIME_LIMIT)
             && $timeLimit = $this->input->getOption(self::TIME_LIMIT)) {
             $this->timeLimit = (int)$timeLimit;
         }
@@ -84,7 +84,7 @@ abstract class AbstractCommand extends Command
 
     protected function stopScriptIfLimitsReached(): void
     {
-        if ($this->didScriptReachedLimits()) {
+        if (true === $this->didScriptReachedLimits()) {
             exit(static::INVALID);
         }
     }
@@ -124,9 +124,9 @@ abstract class AbstractCommand extends Command
 
         $memoryUsage = \memory_get_usage(true);
 
-        if ($memoryUsage > $memoryLimit - 10485760) {
-            $humanReadableMemoryUsed = MemoryService::convertBitsToHumanReadable($memoryUsage);
-            $humanReadableMemoryLimit = MemoryService::convertBitsToHumanReadable($memoryLimit - 10485760);
+        if ($memoryUsage > $memoryLimit) {
+            $humanReadableMemoryUsed = MemoryService::convertBytesToHumanReadable($memoryUsage);
+            $humanReadableMemoryLimit = MemoryService::convertBytesToHumanReadable($memoryLimit);
 
             $this->warning(
                 \sprintf(

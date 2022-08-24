@@ -20,7 +20,7 @@ trait KubernetesJobTrait
         $baseIndent = $this->getIndent($baseIndentLevel, $indentSize);
 
         foreach ($array as $key => $value) {
-            if (\is_array($value)) {
+            if (true === \is_array($value)) {
                 $command[] = \sprintf('%s%s:', $baseIndent, $key);
                 $command[] = $this->convertArrayToString($value, $baseIndentLevel + 1, $indentSize);
                 continue;

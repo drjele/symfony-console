@@ -59,7 +59,7 @@ class CrontabTemplate implements TemplateInterface
         $commandParts = $commandDto->getCommand();
         \array_unshift($commandParts, $schedule);
 
-        if ($commandDto->getSettings()->getLog() ?? $configDto->getSettings()->getLog()) {
+        if (($commandDto->getSettings()->getLog() ?? $configDto->getSettings()->getLog()) === true) {
             $commandParts[] = \sprintf(
                 '>> %s/%s.log 2>&1',
                 $configDto->getLogsDir(),
