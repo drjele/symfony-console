@@ -15,6 +15,7 @@ use Drjele\Symfony\Console\Service\ConfGenerateService;
 use Drjele\Symfony\Console\Template\SupervisorTemplate;
 use Drjele\Symfony\Phpunit\MockDto;
 use Drjele\Symfony\Phpunit\TestCase\AbstractTestCase;
+use Exception;
 use Mockery;
 use Mockery\MockInterface;
 use ReflectionMethod;
@@ -81,7 +82,7 @@ final class WorkerCreateCommandTest extends AbstractTestCase
                     ->byDefault()
                     ->andReturnUsing(
                         function (string $message): void {
-                            throw new \Exception($message);
+                            throw new Exception($message);
                         }
                     );
 

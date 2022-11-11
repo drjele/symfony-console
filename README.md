@@ -55,14 +55,14 @@ Create a template service to implement **Drjele\Symfony\Console\Contract\Templat
 services:
     _instanceof:
         Drjele\Symfony\Console\Contract\TemplateInterface:
-            tags: ['drjele.symfony.console.template']
+            tags: [ 'drjele.symfony.console.template' ]
 ```
 
 ## Dev
 
 ```shell
 git clone git@gitlab.com:drjele-symfony/console.git
-cd command/scripts/docker/
+cd console/scripts/docker/
 cp ~/.ssh/id_* ./
 
 echo 'git config --global user.name "<your name>"' >> ./.profile_personal && \
