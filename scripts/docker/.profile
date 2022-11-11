@@ -35,7 +35,7 @@ git_branch_new() {
     if [[ -e 'composer.json' ]]; then
         composer install
     fi
-
+``
     git st
 }
 
