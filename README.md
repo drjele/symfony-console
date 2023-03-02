@@ -62,7 +62,7 @@ services:
 
 ```shell
 git clone git@gitlab.com:drjele-symfony/console.git
-cd console/scripts/docker/
+cd console
 
 rm -rf .git/hooks && ln -s ../dev/git-hooks .git/hooks
 
