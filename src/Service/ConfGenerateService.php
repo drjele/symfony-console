@@ -23,7 +23,7 @@ class ConfGenerateService
     {
         $this->templates = [];
         foreach ($templates as $template) {
-            $this->templates[\get_class($template)] = $template;
+            $this->templates[$template::class] = $template;
         }
     }
 
