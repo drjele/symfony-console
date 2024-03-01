@@ -28,7 +28,7 @@ class MemoryService
     {
         $unit = ['B ', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
-        return @\round($bytes / 1024 ** ($i = \floor(\log($bytes, 1024))), 2) . ' ' . $unit[(int)$i];
+        return @\round($bytes / 1024 ** ($i = \floor(\log($bytes, 1024))), 2) . ' ' . $unit[(int) $i];
     }
 
     public static function returnBytes(string $value): int
@@ -37,7 +37,7 @@ class MemoryService
 
         \preg_match('#([0-9]+)[\s]*([a-z]+)#i', $value, $matches);
 
-        $value = (int)($matches[1] ?? $value);
+        $value = (int) ($matches[1] ?? $value);
         $unitOfMeasurement = $matches[2] ?? null;
 
         if (null !== $unitOfMeasurement) {

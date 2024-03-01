@@ -88,7 +88,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode(static::NAME)->end()
             ->arrayNode(static::COMMAND)/* command start */
             ->isRequired()
-            ->beforeNormalization()->ifString()->then(fn ($command) => [$command])->end()
+            ->beforeNormalization()->ifString()->then(fn($command) => [$command])->end()
             ->scalarPrototype()->end()
             ->end()/* command end */
             ->arrayNode(static::SCHEDULE)/* schedule start */
@@ -138,7 +138,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode(static::NAME)->end()
             ->arrayNode(static::COMMAND)
             ->isRequired()
-            ->beforeNormalization()->ifString()->then(fn ($command) => [$command])->end()
+            ->beforeNormalization()->ifString()->then(fn($command) => [$command])->end()
             ->scalarPrototype()->end()
             ->end();
 
