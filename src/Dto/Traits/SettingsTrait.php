@@ -23,7 +23,7 @@ trait SettingsTrait
 
         $value = $this->settings->{$setting};
 
-        return null !== $value ? (string) $value : $value;
+        return null !== $value ? (string)$value : $value;
     }
 
     private function loadProperties(array $data): void
