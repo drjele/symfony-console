@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Copyright (c) Adrian Jeledintan
  */
 
-namespace Drjele\Symfony\Console\OutputStyle\Traits;
+namespace Drjele\Symfony\Console\OutputStyle\Trait;
 
 use DateTime;
 use Drjele\Symfony\Console\Service\MemoryService;

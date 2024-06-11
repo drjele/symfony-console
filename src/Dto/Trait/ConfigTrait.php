@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Copyright (c) Adrian Jeledintan
  */
 
-namespace Drjele\Symfony\Console\Dto\Traits;
+namespace Drjele\Symfony\Console\Dto\Trait;
 
 use Drjele\Symfony\Console\DependencyInjection\Configuration;
 

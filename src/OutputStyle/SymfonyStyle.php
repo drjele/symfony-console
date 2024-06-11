@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Drjele\Symfony\Console\OutputStyle;
 
-use Drjele\Symfony\Console\OutputStyle\Traits\SymfonyStyleTrait;
+use Drjele\Symfony\Console\OutputStyle\Trait\SymfonyStyleTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle as BaseSymfonyStyle;

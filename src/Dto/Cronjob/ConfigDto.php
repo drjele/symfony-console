@@ -11,7 +11,7 @@ namespace Drjele\Symfony\Console\Dto\Cronjob;
 use Drjele\Symfony\Console\Contract\ConfigInterface;
 use Drjele\Symfony\Console\Contract\SettingsInterface;
 use Drjele\Symfony\Console\DependencyInjection\Configuration;
-use Drjele\Symfony\Console\Dto\Traits\ConfigTrait;
+use Drjele\Symfony\Console\Dto\Trait\ConfigTrait;
 
 class ConfigDto implements ConfigInterface, SettingsInterface
 {

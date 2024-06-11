@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Drjele\Symfony\Console\Command;
 
 use DateTime;
-use Drjele\Symfony\Console\OutputStyle\Traits\SymfonyStyleTrait;
+use Drjele\Symfony\Console\OutputStyle\Trait\SymfonyStyleTrait;
 use Drjele\Symfony\Console\Service\MemoryService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

@@ -14,7 +14,7 @@ use Drjele\Symfony\Console\Dto\ConfFilesDto;
 use Drjele\Symfony\Console\Dto\Worker\CommandDto;
 use Drjele\Symfony\Console\Dto\Worker\ConfigDto;
 use Drjele\Symfony\Console\Exception\Exception;
-use Drjele\Symfony\Console\Template\Traits\WorkerNumberOfProcessesTrait;
+use Drjele\Symfony\Console\Template\Trait\WorkerNumberOfProcessesTrait;
 
 class SupervisorTemplate implements TemplateInterface
 {

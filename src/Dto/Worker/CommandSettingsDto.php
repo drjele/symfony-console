@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Drjele\Symfony\Console\Dto\Worker;
 
 use Drjele\Symfony\Console\Contract\SettingInterface;
-use Drjele\Symfony\Console\Dto\Traits\SettingsTrait;
-use Drjele\Symfony\Console\Dto\Traits\SupervisorSettingsTrait;
+use Drjele\Symfony\Console\Dto\Trait\SettingsTrait;
+use Drjele\Symfony\Console\Dto\Trait\SupervisorSettingsTrait;
 
 class CommandSettingsDto implements SettingInterface
 {

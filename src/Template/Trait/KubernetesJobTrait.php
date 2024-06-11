@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Copyright (c) Adrian Jeledintan
  */
 
-namespace Drjele\Symfony\Console\Template\Traits;
+namespace Drjele\Symfony\Console\Template\Trait;
 
 trait KubernetesJobTrait
 {

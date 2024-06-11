@@ -13,8 +13,8 @@ use Drjele\Symfony\Console\Contract\TemplateInterface;
 use Drjele\Symfony\Console\Dto\ConfFilesDto;
 use Drjele\Symfony\Console\Dto\Worker\CommandDto;
 use Drjele\Symfony\Console\Dto\Worker\ConfigDto;
-use Drjele\Symfony\Console\Template\Traits\KubernetesJobTrait;
-use Drjele\Symfony\Console\Template\Traits\WorkerNumberOfProcessesTrait;
+use Drjele\Symfony\Console\Template\Trait\KubernetesJobTrait;
+use Drjele\Symfony\Console\Template\Trait\WorkerNumberOfProcessesTrait;
 
 class KubernetesWorkerTemplate implements TemplateInterface
 {

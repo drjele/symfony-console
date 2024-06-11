@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Drjele\Symfony\Console\Dto\Cronjob;
 
 use Drjele\Symfony\Console\Contract\SettingInterface;
-use Drjele\Symfony\Console\Dto\Traits\SettingsTrait;
+use Drjele\Symfony\Console\Dto\Trait\SettingsTrait;
 
 class ConfigSettingsDto implements SettingInterface
 {

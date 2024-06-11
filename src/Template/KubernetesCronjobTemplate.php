@@ -14,7 +14,7 @@ use Drjele\Symfony\Console\Dto\ConfFilesDto;
 use Drjele\Symfony\Console\Dto\Cronjob\CommandDto;
 use Drjele\Symfony\Console\Dto\Cronjob\ConfigDto;
 use Drjele\Symfony\Console\Dto\Cronjob\ScheduleDto;
-use Drjele\Symfony\Console\Template\Traits\KubernetesJobTrait;
+use Drjele\Symfony\Console\Template\Trait\KubernetesJobTrait;
 
 class KubernetesCronjobTemplate implements TemplateInterface
 {
