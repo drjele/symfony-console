@@ -13,6 +13,19 @@ else
 fi
 
 DOCKER_PATH="dev/docker/"
+CONTAINER_DEV="dev"
+
+error() {
+    println "${COLOR_RED}( $1 )${COLOR_RESET}"
+}
+
+warning() {
+    println "${COLOR_YELLOW}( $1 )${COLOR_RESET}"
+}
+
+section() {
+    println "${COLOR_YELLOW}[[${COLOR_GREEN} $1 ${COLOR_YELLOW}]]${COLOR_RESET}"
+}
 
 print_command() {
     println "${COLOR_YELLOW}[${COLOR_GREEN} $1 ${COLOR_YELLOW}]${COLOR_RESET}"
@@ -27,5 +40,36 @@ println() {
 }
 
 run_in_container() {
-    ./dc exec -T php "$@"
+    bash ${PWD}/dc exec -T "$@"
+}
+
+run_in_container_dev() {
+    run_in_container "${CONTAINER_DEV}" "$@"
+}
+
+error_container() {
+    echo "the '$1' container is not running"
+}
+
+check_container() {
+    CONTAINER_NAME="$1"
+
+    if [[ $(docker_compose_no_log ps -q "${CONTAINER_NAME}") = "" ]]; then
+        echo 1
+    fi
+
+    echo 0
+}
+
+docker_compose_no_log() {
+    (
+        cd ${DOCKER_PATH} &&
+        USER_ID=$(id -u) GROUP_ID=$(id -g) docker compose --env-file .env --env-file .env.local "$@"
+    )
+}
+
+docker_compose() {
+    print_command "(cd ${DOCKER_PATH} && USER_ID=$(id -u) GROUP_ID=$(id -g) docker compose --env-file .env --env-file .env.local $*)"
+
+    docker_compose_no_log "$@"
 }

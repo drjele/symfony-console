@@ -54,4 +54,9 @@ trait SymfonyStyleTrait
             $text
         );
     }
+
+    private function initializeSymfonyStyle(): void
+    {
+        $this->style = new SymfonyStyle($this->input, $this->output);
+    }
 }

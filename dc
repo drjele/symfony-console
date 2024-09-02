@@ -2,5 +2,16 @@
 
 . "${PWD}/dev/utility.sh"
 
-print_command "(cd ${DOCKER_PATH} && USER_ID=$(id -u) GROUP_ID=$(id -g) docker compose $*)"
-(cd ${DOCKER_PATH} && USER_ID=$(id -u) GROUP_ID=$(id -g) docker compose "$@")
+create_env() {
+    if [[ ! -e ${DOCKER_PATH}.env.local ]]; then
+        println "touch ${DOCKER_PATH}.env.local"
+
+        touch ${DOCKER_PATH}.env.local
+    fi
+
+    rm -rf .git/hooks && ln -s ../dev/git-hooks .git/hooks
+}
+
+create_env
+
+docker_compose "$@"

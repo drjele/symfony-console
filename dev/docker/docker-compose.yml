@@ -1,6 +1,5 @@
-version: '3.8'
 services:
-    php:
+    dev:
         build:
             context: ${RELATIVE_PATH_TO_ROOT}
             dockerfile: ${CONFIG_PATH}/Dockerfile
