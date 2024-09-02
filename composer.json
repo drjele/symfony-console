@@ -1,7 +1,7 @@
 {
     "name": "drjele/symfony-console",
     "type": "symfony-bundle",
-    "version": "v4.0.1",
+    "version": "v4.1.0",
     "description": "Symfony console utilities",
     "keywords": [
         "symfony",
