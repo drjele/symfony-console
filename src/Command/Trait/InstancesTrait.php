@@ -14,14 +14,14 @@ trait InstancesTrait
 
     protected function computeInstances(): array
     {
-        $instances = (int)$this->input->getoption(self::MAX_INSTANCES);
+        $maxInstances = (int)$this->input->getoption(self::MAX_INSTANCES);
         $instanceIndex = (int)$this->input->getoption(self::INSTANCE_INDEX);
 
-        if ($instances < 1 || $instanceIndex < 1 || $instanceIndex > $instances) {
+        if ($maxInstances < 1 || $instanceIndex < 1 || $instanceIndex > $maxInstances) {
             throw new Exception('invalid instances and instance index provided');
         }
 
-        return [$instances, $instanceIndex];
+        return [$maxInstances, $instanceIndex];
     }
 
     private function configureInstances(): void
