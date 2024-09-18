@@ -1,5 +1,7 @@
 # Symfony console
 
+**NO LONGER MAINTAINED, MOVED TO https://gitlab.com/precision-soft-open-source/symfony/console**
+
 **You may fork and modify it as you wish**.
 
 Any suggestions are welcomed.
